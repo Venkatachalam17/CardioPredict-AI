@@ -2,6 +2,8 @@ Name,Age,Gender,BloodPressure,Cholesterol,HeartDisease
 Rahul,45,Male,130,220,Yes
 Priya,38,Female,120,180,No
 Arun,55,Male,145,260,Yes
-Meena,29,Female,110,170,No
+Meena,-10,Female,110,170,No
 Karthik,62,Male,150,290,Yes
 Sneha,41,Female,125,210,No
+Rahul,45,Male,130,220,Yes
+Priya,thirty-eight,Female,120,180,No
