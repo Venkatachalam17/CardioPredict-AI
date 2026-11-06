@@ -118,3 +118,59 @@ plt.savefig('outlier_boxplots.png')
 plt.close() # Close the plot to free up memory
 
 print("Visualization saved successfully as 'outlier_boxplots.png' in your project folder!")
+
+
+
+
+# --- WEEK 3: MODEL BUILDING, TRAINING & EVALUATION ---
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+print("\n--- Starting Week 3: Model Training & Evaluation ---")
+
+# 1. Split the data into Training (80%) and Testing (20%) sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+print(f"Training set shape: {X_train.shape}")
+print(f"Testing set shape: {X_test.shape}")
+
+# 2. Initialize and train the Random Forest Classifier
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_model.fit(X_train, y_train)
+print("Random Forest model trained successfully!")
+
+# 3. Predict on the test set
+y_pred = rf_model.predict(X_test)
+
+# 4. Evaluate performance using standard classification metrics
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+
+print(f"\n--- Model Performance Metrics ---")
+print(f"Accuracy:  {accuracy:.4f}")
+print(f"Precision: {precision:.4f}")
+print(f"Recall:    {recall:.4f}")
+print(f"F1-Score:  {f1:.4f}")
+
+# Detailed Classification Report
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+
+# 5. Generate and save the Confusion Matrix visualization
+conf_matrix = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(6, 5))
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', cbar=False,
+            xticklabels=['Healthy', 'At Risk'],
+            yticklabels=['Healthy', 'At Risk'])
+plt.xlabel('Predicted Label')
+plt.ylabel('True Label')
+plt.title('CardioPredict - Confusion Matrix')
+plt.tight_layout()
+plt.savefig('confusion_matrix.png')
+plt.close()
+
+print("\nConfusion Matrix visualization saved successfully as 'confusion_matrix.png'!")
